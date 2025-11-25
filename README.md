@@ -165,7 +165,7 @@ BEGIN
                 WHEN 'MARKETING' THEN v_bonus_rate := 0.09;
                 WHEN 'SALES' THEN v_bonus_rate := 0.15;
                 ELSE 
-                    DBMS_OUTPUT.PUT_LINE('   ⚠️  Unknown department: ' || v_employees(i).department);
+                    DBMS_OUTPUT.PUT_LINE('    Unknown department: ' || v_employees(i).department);
                     v_bonus_rate := 0.05; -- Default rate
             END CASE;
             
@@ -213,7 +213,7 @@ BEGIN
         ROUND(v_total_bonus_payout / NULLIF(v_employees.COUNT, 0), 2));
     
     IF v_invalid_data_found THEN
-        DBMS_OUTPUT.PUT_LINE('⚠️  Note: Some employees were skipped due to missing performance data.');
+        DBMS_OUTPUT.PUT_LINE(' Note: Some employees were skipped due to missing performance data.');
     END IF;
     
     DBMS_OUTPUT.PUT_LINE('');
@@ -281,14 +281,20 @@ Processing completed at: 2024-01-20 14:30:25
 PL/SQL Concept	Demonstration in Code	Purpose & Best Practices
 Collections		
 
-  .VARRAY	dept_bonus_array for fixed bonus rates	Fixed-size collection, maintains order
-  .Associative Array	dept_map for department name mapping	Key-value pairs, efficient lookup
-  . Nested Table	emp_table_type for employee records	Dynamic sizing, bulk operations
+  .VARRAY	:dept_bonus_array for fixed bonus rates	Fixed-size collection, maintains order
+  
+  .Associative Array	:dept_map for department name mapping	Key-value pairs, efficient lookup
+  
+  . Nested Table	:emp_table_type for employee records	Dynamic sizing, bulk operations
   Records		
-  .User-defined Record	emp_rec_type composite employee data	Groups related fields of different types
-  .Table-based Record	Implicit in BULK COLLECT	Mirrors table structure
-  .GOTO Statement	GOTO skip_bonus_calculation	Controlled jump for error handling
-  .Bulk Processing	BULK COLLECT INTO v_employees	Efficient multi-row operations
+  
+  .User-defined Record	:emp_rec_type composite employee data	Groups related fields of different types
+  
+  .Table-based Record	:Implicit in BULK COLLECT	Mirrors table structure
+  
+  .GOTO Statement	:GOTO skip_bonus_calculation	Controlled jump for error handling
+  
+  .Bulk Processing	:BULK COLLECT INTO v_employees	Efficient multi-row operations
 
 # 6. Key Learning Points
 Collections Demonstrated:
